@@ -41,9 +41,10 @@ export default function PsychicGreeter() {
             Listening to the winds…
           </div>
         ) : (
-          <div className="text-xl text-gray-100 opacity-0 animate-fadeIn">
+          <div className="text-xl text-gray-100 animate-fadeIn will-change-opacity">
             {message}
           </div>
+
         )}
       </div>
     </div>
