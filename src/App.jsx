@@ -1,37 +1,45 @@
-import Feature from '@components/Feature';
-import Footer from '@components/Footer';
-import logo from '@images/logo.png';
-
-const features = [
-  {
-    title: 'npm run start',
-    description: 'Run the React app in development mode with live reloading.',
-  },
-  {
-    title: 'npm run build',
-    description: 'Bundles the React app for deployment in production environment.',
-  },
-  {
-    title: 'npm run inline',
-    description: 'Inline all CSS and JS in a single minfied file.',
-  },
-];
+import Woodworking from '@images/Woodworking.png';
+import cycling from '@images/cycling.png';
+import Travel from '@images/Travel.png';
+import Retired from '@images/Retired.png';
 
 const App = () => (
-<div className="flex min-h-screen flex-col justify-center bg-gray-50 px-6"> 
-  <div className="mx-auto max-w-3xl text-center animate-fadeIn"> 
-    <h1 className="text-5xl font-bold text-gray-900 mb-6"> 
-      Welcome to <span className="text-blue-600">Klupar.com</span> 
-    </h1> 
-    
-    <p className="text-xl text-gray-600 leading-relaxed mb-10"> 
-      A space for projects, ideas, and the things that matter most. Built with intention. Designed for clarity. 
-    </p> 
-    
-    <a href="#" className="inline-block px-8 py-4 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition" > 
-      Explore 
-    </a> 
-  </div> 
-</div>);
+  <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 px-6 py-16">
+    <div className="max-w-4xl mx-auto text-center animate-fadeIn">
+      <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        Welcome to <span className="text-blue-600">Klupar.com</span>
+      </h1>
+
+      <p className="text-xl text-gray-600 mb-12">
+        A calm corner of the internet. Family, projects, and the things we love.
+      </p>
+
+      {/* Photo Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <img
+          src={Woodworking}
+          alt="Woodworking"
+          className="rounded-xl shadow-md object-cover w-full h-64"
+        />
+        <img
+          src={cycling}
+          alt="Cycling"
+          className="rounded-xl shadow-md object-cover w-full h-64"
+        />
+        <img
+          src={Travel}
+          alt="Travel"
+          className="rounded-xl shadow-md object-cover w-full h-64"
+        />
+        <img
+          src={Retired}
+          alt="Retired"
+          className="rounded-xl shadow-md object-cover w-full h-64"
+        />
+      </div>
+    </div>
+  </div>
+);
 
 export default App;
+
