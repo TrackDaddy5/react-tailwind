@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 export default function PsychicGreeter() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     async function fetchGreeting() {
       try {
-        // Browser context
         const context = {
           localTime: new Date().toISOString(),
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -21,11 +21,17 @@ export default function PsychicGreeter() {
         });
 
         const data = await response.json();
-
         setMessage(data.message);
+
+        // Dramatic pause before reveal
+        setTimeout(() => {
+          setShowMessage(true);
+          setLoading(false);
+        }, 1500);
+
       } catch (err) {
         setMessage("The spirits are unusually quiet right now…");
-      } finally {
+        setShowMessage(true);
         setLoading(false);
       }
     }
@@ -36,15 +42,16 @@ export default function PsychicGreeter() {
   return (
     <div className="w-full flex justify-center mt-12">
       <div className="max-w-xl text-center px-6">
-        {loading ? (
+        {loading && (
           <div className="text-gray-400 italic animate-pulse">
             Listening to the winds…
           </div>
-        ) : (
-          <div className="text-xl text-gray-100 animate-fadeIn will-change-opacity">
+        )}
+
+        {!loading && showMessage && (
+          <div className="text-xl text-gray-100 animate-fadeIn">
             {message}
           </div>
-
         )}
       </div>
     </div>
