@@ -11,7 +11,7 @@ const App = () => (
       </h1>
 
       <p className="text-xl text-gray-600 mb-12">
-        A calm corner of the internet. Family, projects, and the things we love.
+         A space for projects, ideas, and the things that matter most. Built with intention. Designed for clarity.
       </p>
 
       {/* Photo Grid */}
