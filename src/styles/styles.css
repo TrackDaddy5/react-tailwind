@@ -51,3 +51,14 @@
 .animate-fadeIn {
   animation: fadeIn 1s ease-out;
 }
+
+@layer utilities {
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 1.2s ease-out forwards;
+  }
+}
