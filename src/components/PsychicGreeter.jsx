@@ -9,7 +9,7 @@ export default function PsychicGreeter() {
     async function fetchGreeting() {
       try {
         const context = {
-          localTime: new Date().toISOString(),
+          localTime: new Date().toLocaleString(),
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           language: navigator.language
         };
