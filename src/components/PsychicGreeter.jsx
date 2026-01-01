@@ -63,6 +63,7 @@ export default function PsychicGreeter() {
           "https://psychic-greeter-api.azurewebsites.net/api/greeter",
           {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(context)
           }
