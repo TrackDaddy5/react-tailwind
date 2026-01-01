@@ -53,6 +53,23 @@ export default function PsychicGreeter() {
   const [loading, setLoading] = useState(true);
   const [showMessage, setShowMessage] = useState(false);
 
+  // ⭐ NEW — debug toggle + debug data
+  const [debugVisible, setDebugVisible] = useState(false);
+  const [debugData, setDebugData] = useState(null);
+
+  // ⭐ NEW — keyboard listener for debug overlay
+  useEffect(() => {
+    function handleKey(e) {
+      // Toggle with ~ or Ctrl+D
+      if (e.key === "`" || (e.ctrlKey && e.key === "d")) {
+        setDebugVisible(v => !v);
+      }
+    }
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
+
   useEffect(() => {
     async function fetchGreeting() {
       try {
@@ -72,6 +89,9 @@ export default function PsychicGreeter() {
         const data = await response.json();
         setMessage(data.message);
 
+        // ⭐ NEW — store context for debug overlay
+        setDebugData(data.context);
+
         // Dramatic pause before reveal
         setTimeout(() => {
           setShowMessage(true);
@@ -89,20 +109,52 @@ export default function PsychicGreeter() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center mt-12">
-      <div className="max-w-xl text-center px-6">
-        {loading && (
-          <div className="text-gray-400 italic animate-pulse">
-            Listening to the winds…
-          </div>
-        )}
+    <>
+      {/* Main UI */}
+      <div className="w-full flex justify-center mt-12">
+        <div className="max-w-xl text-center px-6">
+          {loading && (
+            <div className="text-gray-400 italic animate-pulse">
+              Listening to the winds…
+            </div>
+          )}
 
-        {!loading && showMessage && (
-          <div className="text-xl text-gray-100 animate-fadeIn">
-            {message}
-          </div>
-        )}
+          {!loading && showMessage && (
+            <div className="text-xl text-gray-100 animate-fadeIn">
+              {message}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* ⭐ NEW — CRT Debug Overlay */}
+      {debugVisible && (
+        <pre
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            padding: "12px",
+            background: "rgba(0, 0, 0, 0.85)",
+            color: "#00FF00",
+            fontFamily: "monospace",
+            fontSize: "12px",
+            lineHeight: "1.3",
+            maxWidth: "40vw",
+            maxHeight: "90vh",
+            overflow: "auto",
+            borderRight: "1px solid #003300",
+            borderBottom: "1px solid #003300",
+            zIndex: 99999,
+            whiteSpace: "pre-wrap",
+            backgroundImage:
+              "linear-gradient(rgba(0,255,0,0.05) 50%, transparent 50%)",
+            backgroundSize: "100% 2px"
+          }}
+        >
+          {JSON.stringify(debugData, null, 2)}
+        </pre>
+      )}
+    </>
   );
 }
